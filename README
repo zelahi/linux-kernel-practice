@@ -1,0 +1,24 @@
+## Network Driver Test
+
+## Installation Requirements
+
+Since I have a M1 laptop I had to setup [VMWare Fusion](https://www.vmware.com/products/fusion.html).
+This was the only virtualization software I could find that works on a m1 laptop.
+
+1. Download and setup VMWare Fusion here: [VmWare](https://www.vmware.com/products/fusion.html)
+2. Download the ubuntu iso: [Ubuntu Iso Download](https://cdimage.ubuntu.com/daily-live/current/)
+3. Follow the instructions for VmWare Fusion to setup a Ubuntu VM
+
+### Loading a Linux Module
+
+1. I have a `test.c` which I use to learn how to load a kernal module into a VM
+2. Run the Makefile command: `make all`
+3. Load the module: `sudo insmod test.ko`
+4. View the cmd in the kernal using: `dmesg`
+5. Remove the module: `sudo rmmod test.ko`
+5. Run `dmesg` and Verify we see a `Goodbye` message
+
+
+###  Description
+
+The scripts here 

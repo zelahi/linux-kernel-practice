@@ -19,4 +19,8 @@ The network module looks at packets that go between  `NIC1` and `NIC2`. To find 
 
 1. ip addr
 2. From there I retrieved the MAC address which on the VM I spun up was set to 00:00:00:00:00
-3. Network.c is the module I use to check the network communication
+3. `network.c` is the file I used to measure packet arrival and destination
+4. `make load-module` loads the kernel module
+
+### Debugging tips
+Check `dmesg` -> This has all the networking messages from the module once it loads

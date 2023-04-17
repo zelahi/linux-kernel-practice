@@ -8,14 +8,12 @@ static struct nf_hook_ops nfho_incoming, nfho_outgoing;
 
 static unsigned int hook_incoming(void *priv, struct sk_buff *skb, const struct nf_hook_state *state) {
     ktime_t arrival_time = ktime_get();
-    // do something with the packet here
     printk(KERN_INFO "Packet arrived at %lld", arrival_time);
     return NF_ACCEPT; // or NF_DROP, etc.
 }
 
 static unsigned int hook_outgoing(void *priv, struct sk_buff *skb, const struct nf_hook_state *state) {
     ktime_t departure_time = ktime_get();
-    // calculate packet latency or processing time here
     printk(KERN_INFO "Packet departed at %lld", departure_time);
     return NF_ACCEPT; // or NF_DROP, etc.
 }
@@ -40,3 +38,5 @@ void cleanup_module() {
     nf_unregister_net_hook(&init_net, &nfho_outgoing);
     nf_unregister_net_hook(&init_net, &nfho_incoming);
 }
+
+MODULE_LICENSE("GPL");

@@ -2,12 +2,7 @@
 
 ## Installation Requirements
 
-Since I have a M1 laptop I had to setup [VMWare Fusion](https://www.vmware.com/products/fusion.html).
-This was the only virtualization software I could find that works on a m1 laptop.
-
-1. Download and setup VMWare Fusion here: [VmWare](https://www.vmware.com/products/fusion.html)
-2. Download the ubuntu iso: [Ubuntu Iso Download](https://cdimage.ubuntu.com/daily-live/current/)
-3. Follow the instructions for VmWare Fusion to setup a Ubuntu VM
+Since I had a M1 laptop, I was having trouble getting Vagrant and different VMs to work well.  To get around this I spun up a VM in GCP and tested the scripts over there
 
 ### Loading a Linux Module
 
@@ -19,6 +14,9 @@ This was the only virtualization software I could find that works on a m1 laptop
 5. Run `dmesg` and Verify we see a `Goodbye` message
 
 
-###  Description
+###  Network module
+The network module looks at packets that go between  `NIC1` and `NIC2`. To find these via linux, I did:
 
-The scripts here 
+1. ip addr
+2. From there I retrieved the MAC address which on the VM I spun up was set to 00:00:00:00:00
+3. Network.c is the module I use to check the network communication

@@ -20,14 +20,14 @@ static unsigned int hook_outgoing(void *priv, struct sk_buff *skb, const struct 
 
 int init_module() {
     nfho_incoming.hook = hook_incoming;
-    nfho_incoming.pf = PF_INET;
-    nfho_incoming.hooknum = NF_INET_LOCAL_IN;
+    nfho_incoming.pf = PF_INET;  // IPv4 - Protocol for packet filtering
+    nfho_incoming.hooknum = NF_INET_LOCAL_IN; // all incoming packets addressed to the local computer pass this hook in the function 
     nfho_incoming.priority = NF_IP_PRI_FIRST;
     nf_register_net_hook(&init_net, &nfho_incoming);
 
     nfho_outgoing.hook = hook_outgoing;
     nfho_outgoing.pf = PF_INET;
-    nfho_outgoing.hooknum = NF_INET_LOCAL_OUT;
+    nfho_outgoing.hooknum = NF_INET_LOCAL_OUT; // all outgoing packets address -> used to measure departure time
     nfho_outgoing.priority = NF_IP_PRI_FIRST;
     nf_register_hook(&init_net, &nfho_outgoing);
 

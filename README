@@ -24,3 +24,7 @@ The network module looks at packets that go between  `NIC1` and `NIC2`. To find 
 
 ### Debugging tips
 Check `dmesg` -> This has all the networking messages from the module once it loads
+
+### References
+https://netfilter.org/documentation/HOWTO/netfilter-hacking-HOWTO.txt
+http://wiki.dreamrunner.org/public_html/Linux/Networks/netfilter.html

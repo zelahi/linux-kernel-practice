@@ -1,15 +1,17 @@
-build:
-	docker build -t my-test:v1.0 .
+TARGET ?= producer
 
-run:
-	docker run --privileged -it my-test:v1.0
 
-obj-m += test.o
+obj-m += $(TARGET).o
 all:
-	make -C /lib/modules/$(uname -r)/build M=$(PWD) modules
-
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 clean:
-	make -C /lib/modules/$(uname -r)/build M=$(PWD) clean
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
 
-load-module:
-	sudo insmod network.ko
+load-producer:
+	sudo insmod $(TARGET).ko
+
+remove-module:
+	sudo rmmod $(TARGET).ko
+
+test:
+	sudo dmesg

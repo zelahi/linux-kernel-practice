@@ -3,8 +3,8 @@
  * 	a consumer that calculates the average packet count in one minute
  */ 
  
-#include <linux/kernel.h> /* We are doing kernel work */ 
-#include <linux/module.h> /* Specifically, a module */ 
+#include <linux/kernel.h>
+#include <linux/module.h>
 #include <linux/netfilter.h>
 #include <linux/netfilter_ipv4.h>
 #include <linux/ip.h>
@@ -25,8 +25,7 @@ unsigned int hook_func(void *priv, struct sk_buff *skb, const struct nf_hook_sta
     
     // Check if the packet is an IPv4 packet
     if (skb->protocol == htons(ETH_P_IP)) {
-        iph = ip_hdr(skb);  // Get a pointer to the IP header
-        // Log the source IP address
+        iph = ip_hdr(skb);
         printk(KERN_INFO "Packet from %pI4\n", &iph->saddr);
     	packet_count ++;
 	wake_up_interruptible(&wait_queue); // wake up the consumer
@@ -40,7 +39,7 @@ unsigned int hook_func(void *priv, struct sk_buff *skb, const struct nf_hook_sta
 int init(void) 
 { 
     
-    // FIll in the details in the hook struct
+    // Construct the Hook Struct
     nfho.hook = hook_func;
     nfho.pf = PF_INET;
     nfho.hooknum = NF_INET_PRE_ROUTING;
@@ -57,6 +56,9 @@ unsigned int get_packet_count(void) {
 	return packet_count;
 }
 
+/* 
+ * consumer returns the count and average packets per set time
+*/
 static int consumer(void *arg) {
 	unsigned int count = 0;
 	unsigned int avg = 0;
